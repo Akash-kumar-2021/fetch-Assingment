@@ -49,17 +49,48 @@
             cursor: pointer;
             color: red;
         }
+        #search-box
+        {
+            width: 15%;
+            /* border: 1px solid green; */
+            display: flex;
+            margin: auto;
+            margin-bottom: 40px;
+            justify-content:space-around;
+        }
+        button{
+            width: 100px;
+            border: none;
+            background-color:green;
+            border-radius: 5px;
+        }
+        button:hover
+        {
+        cursor: pointer;
+        background-color: red;
+        color: white;
+    
+        }
        
     </style>
 </head>
 <body>
     <h1>OMBD Movies List</h1>
+    <div id="search-box">
+     <input type="text" id="search">
+     <button onclick="check()">submit</button>
+     </div>
     <div id="container">
-
+    
     </div>
     
 </body>
 <script>
+     let search = document.getElementById("search").value ;
+
+     function check()
+     {
+   
     const url =`http://www.omdbapi.com/?s=page&apikey=e5eb4187`
     const container = document.getElementById("container");
     fetch(url)
@@ -69,7 +100,7 @@
     })
     .then(function(res)
     {
-        // console.log("res",res.Search);
+        console.log("res",res.Search);
         appnedData(res.Search);
     })
     .catch(function(err)
@@ -87,16 +118,18 @@
             let title = document.createElement("p");
             title.innerText = el.Title;
 
-            let poster = document.createElement("img");
-            poster.src = el.Poster;
+            // let poster = document.createElement("img");
+            // poster.src = el.Poster;
 
-             let year= document.createElement("p");
-            year.innerText = el.Year;
-            div.append(title,poster,year);
+            //  let year= document.createElement("p");
+            // year.innerText = el.Year;
+            div.append(title);
             container.append(div)
         });
         
         
     }
+}
+    
 </script>
 </html>
